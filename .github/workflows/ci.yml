@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Script syntax
+        run: for f in scripts/*.sh test/*.sh; do bash -n "$f"; done
+      - name: End-to-end tests (simulated S3)
+        run: bash test/run-tests.sh

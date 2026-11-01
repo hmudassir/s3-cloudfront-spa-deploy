@@ -1,0 +1,4 @@
+deploy.env
+backups/
+example/dist/
+node_modules
