@@ -43,6 +43,10 @@ Or add `"deploy": "bash scripts/deploy.sh"` to `package.json` after copying `scr
 
 Needs bash (3.2+ works, so macOS’s default is fine), git and the AWS CLI.
 
+## Architecture
+
+Two thin entry points (`deploy.sh`, `restore.sh`) share one library (`lib.sh`), so rollbacks use exactly the same upload order and cache rules as deploys. Techniques used include configuration over code, ordered idempotent steps, a snapshot before every change, least-privilege credentials, and a test double for the AWS CLI. Details, decisions and alternatives: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+
 ## Tests
 
 ```bash
